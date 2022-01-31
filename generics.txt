@@ -7,14 +7,14 @@
 # TypeScript Generics example and Generics syntax
 
     Example:
-        const lastIndexElement = <T>(arr: T[]): T => {
-        return arr[arr.length - 1];
+        const printArg = <T>(arg: T): void => {
+            console.log(arg);
         };
 
-        console.log(lastIndexElement(["a", "b", "c"]));
-        console.log(lastIndexElement([1, 2, 3]));
+        printArg(1);
+        printArg("a");
 
-    Above example lastIndexElement can be used for any type of array using Generics. <T> is Generics syntax, where T is type. T can be used as aurgument like we 
+    Above example printArg can be used for any type of arg using Generics. <T> is Generics syntax, where T is type. T can be used as aurgument like we 
     in function. we can place any type in place of T. 
 
 
@@ -24,7 +24,7 @@
 
     Example:
         const FullName = <T, U>(firstName: T, lastName: U) => {
-        return firstName + " " + lastName;
+            return firstName + " " + lastName;
         };
 
         console.log(FullName("Tony", "Stark"));
