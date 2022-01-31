@@ -1,0 +1,130 @@
+# TypeScript Generics
+
+    Generics provide us a way to create reusable component in typescript.
+
+
+
+# TypeScript Generics example and Generics syntax
+
+    Example:
+        const lastIndexElement = <T>(arr: T[]): T => {
+        return arr[arr.length - 1];
+        };
+
+        console.log(lastIndexElement(["a", "b", "c"]));
+        console.log(lastIndexElement([1, 2, 3]));
+
+    Above example lastIndexElement can be used for any type of array using Generics. <T> is Generics syntax, where T is type. T can be used as aurgument like we 
+    in function. we can place any type in place of T. 
+
+
+
+
+# Multiple generic types
+
+    Example:
+        const FullName = <T, U>(firstName: T, lastName: U) => {
+        return firstName + " " + lastName;
+        };
+
+        console.log(FullName("Tony", "Stark"));
+
+    As show in Above example we can also use Multiple types.
+
+
+
+
+#Generic type with non-generic Type
+
+    We can also use generic types with non-generic types.
+
+    Example:
+        const studentDetails = <T>(rollNumber:T,name:string) => {
+            console.log(`rollNumber: ${rollNumber}, name: ${name}`)
+        }
+
+        studentDetails<string>("434","Emma")
+        studentDetails<number>(1,"Robert")
+
+    In above example rollNumber is generic type and name is non generic.
+
+
+# Generics interface
+
+    The generics type can also be used with generics interface
+
+    interface Student {  
+        name: string  
+        rollNumber: number  
+    }  
+
+    const studentDetails = <T extends Student>(student: T): void =>{  
+        console.log(`name: ${student.name} \nrollNumber: ${student.rollNumber}`);  
+    }  
+
+    let student = {  
+        name: 'mike ross', rollNumber:3335
+    }  
+
+studentDetails(student);  
+
+# Creating new type using generics interface
+
+    interface student<T> {
+        name: string;
+        rollNumber: T; 
+    }   
+
+    type NumberRollNumberStudent = student<number>;    //  this is student type with rollNumber is number
+    type StringRollNumberStudent = student<string>;    //  this is student type with rollNumber is string
+
+
+
+
+# Generics constraints
+
+    Sometimes we want to generic function which only work on certain types. In condition like this we use generic constraints.
+
+    Example:
+        interface constraints {
+            length: number;
+        }
+
+        const lengthOf = <T extends constraints>(arg: T) => {
+            return arg.length;
+        }
+
+        console.log(lengthOf("hey"))
+
+    Here in above example if we do not use constraints it will throw error because every datatype does not have length property. Here constraints help
+    us in providing certain datatypes.
+
+
+
+
+# Generics class
+
+    Generics type can also be used in class. TypeScript support generics classes.
+
+    Example:
+    class studentDetails<T> {
+        private name;
+        private rollNumber: T;
+
+        setStudentDetails(name: string, rollNumber: T): void {
+            this.name = name;
+            this.rollNumber = rollNumber;
+        }
+
+        getStudentDetails(): void {
+            console.log(`name: ${this.name} \nrollNumber: ${this.rollNumber}`);
+        }
+    }
+
+    const s1 = new studentDetails<number>();
+    s1.setStudentDetails("Harvey",1);
+    s1.getStudentDetails();
+
+    const s2 = new studentDetails<string>();
+    s2.setStudentDetails("Mike","2");
+    s2.getStudentDetails();
